@@ -1,0 +1,138 @@
+<%- layout('./layouts/admin-boilerplate') %>
+    <div class="dash-content">
+        <div class="overview">
+            <div class="container mt-4">
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <div class="title d-flex align-items-center mb-3">
+                            <span class="h4">Dashboard</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row gy-4">
+                    <div class="col-md-4">
+                        <div class="box p-3 border rounded border-dark border-2 text-center">
+                            <i class="uil uil-users-alt mb-2 h1"></i>
+                            <span class="text d-block">Total Verified Users</span>
+                            <span class="number h4">
+                                <%= user[0].count %>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="box p-3 border rounded border-dark border-2 text-center">
+                            <i class="uil uil-shopping-cart-alt mb-2 h1"></i>
+                            <span class="text d-block">Total Orders</span>
+                            <span class="number h4">
+                                <%= orderCount %>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="box p-3 border rounded border-dark border-2 text-center">
+                            <i class="uil uil-box mb-2 h1"></i>
+                            <span class="text d-block">Total Products</span>
+                            <span class="number h4">
+                                <%= productCount %>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="box p-3 border rounded border-dark border-2 text-center">
+                            <i class="uil uil-dollar-sign mb-2 h1"></i>
+                            <span class="text d-block">Total Revenue</span>
+                            <span class="number h4">
+                                <%= total.length> 0 ? total[0].total + total[0].totalShip - total[0].totalDisc : '0' %>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="box p-3 border rounded border-dark border-2 text-center">
+                            <i class="uil uil-percentage mb-2 h1"></i>
+                            <span class="text d-block">Total Discount</span>
+                            <span class="number h4">
+                                <%= total.length> 0 ? total[0].totalDisc : '0' %>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", chartShow, false)
+        function chartShow() {
+            $.ajax({
+                url: '/admin/chart',
+                method: 'get',
+                success: (response) => {
+                    makeChart1(response.orders)
+                    makeChart2(response.categories)
+                }
+            })
+        }
+        function makeChart1(details) {
+            var xValues = details.map((item) => {
+                return item._id[0]
+            })
+            var yValues = details.map((item) => {
+                return item.count
+            })
+            const labels = xValues;
+            const data = {
+                labels: labels,
+                datasets: [{
+                    label: labels,
+                    backgroundColor: ['#ffb3ba', '#ffdfba', '#ffffba', '#baffc9'],
+                    borderColor: '#000',
+                    borderWidth: 2,
+                    barThickness: 60,
+                    data: yValues,
+                }]
+            };
+            const config = {
+                type: 'bar',
+                data: data,
+                options: {
+                    title: {
+                        display: true,
+                        text: 'Total orders'
+                    }
+                }
+            };
+            const myChart = new Chart(
+                document.getElementById('myChart1'),
+                config
+            );
+        }
+        function makeChart2(details) {
+            var xValues = details.map((item) => {
+                return item._id
+            })
+            var yValues = details.map((item) => {
+                return item.count
+            })
+            const labels = xValues;
+            let barColors = ['#ffb3ba', '#ffdfba', '#ffffba', '#baffc9'];
+            const data = {
+                labels: labels,
+                datasets: [{
+                    label: labels,
+                    backgroundColor: barColors,
+                    borderColor: '#000',
+                    data: yValues,
+                }]
+            };
+            const config = {
+                type: 'doughnut',
+                data: data,
+                options: {}
+            };
+            const myChart = new Chart(
+                document.getElementById('myChart2'),
+                config
+            );
+        }
+    </script>

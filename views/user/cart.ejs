@@ -1,0 +1,196 @@
+<% layout('./layouts/user-boilerplate') -%>
+    <section class="h-100 h-custom">
+        <% if (carts!==null && carts.cart.length> 0) { %>
+            <div class="container py-5 h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-12">
+                        <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+                            <div class="card-body p-0">
+                                <div class="row g-0">
+                                    <div class="col-lg-8">
+                                        <div class="p-5">
+                                            <div class="d-flex justify-content-between align-items-center mb-5">
+                                                <h1 class="fw-bold mb-0 text-black">Shopping Cart</h1>
+                                            </div>
+                                            <% carts.cart.forEach(function(c){%>
+                                                <hr class="my-4">
+                                                <div class="row mb-4 d-flex justify-content-between align-items-center">
+                                                    <div class="col-md-2 col-lg-2 col-xl-2">
+                                                        <img src="/public/images/product-img/<%=c.product.image%>"
+                                                            class="img-fluid rounded-3">
+                                                    </div>
+                                                    <div class="col-md-3 col-lg-3 col-xl-3">
+                                                        <h6 class="text-muted">
+                                                            <%=c.product.category%>
+                                                        </h6>
+                                                        <h6 class="text-black mb-0">
+                                                            <%=c.product.title%>
+                                                        </h6>
+                                                    </div>
+                                                    <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                                                        <button data-mdb-button-init data-mdb-ripple-init
+                                                            class="btn btn-link px-2"
+                                                            onclick="changeQuantity('<%=c.product._id%>',' <%=c.price%>',-1, '<%=c.quantity%>')"
+                                                            onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                                            <i class="fas fa-minus"></i>
+                                                        </button>
+                                                        <input id="form1" min="0" name="quantity"
+                                                            value="<%= c.quantity %>" type="text"
+                                                            class="form-control form-control-sm" />
+
+                                                        <button data-mdb-button-init data-mdb-ripple-init
+                                                            class="btn btn-link px-2"
+                                                            onclick="changeQuantity('<%=c.product._id%>',' <%=c.price%>',1,'<%=c.quantity%>')"
+                                                            onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                                            <i class="fas fa-plus"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                                                        <h6 class="mb-0">
+                                                            <%=c.sub_total%>
+                                                        </h6>
+                                                    </div>
+                                                    <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                                                        <button class="btn btn-danger px-2"
+                                                            onclick="removeFromCart('<%=c.product._id%>')"><i
+                                                                class="fas fa-times"></i></button>
+                                                    </div>
+                                                </div>
+                                                <% }) %>
+                                                    <hr class="my-4">
+                                                    <div class="pt-5">
+                                                        <h6 class="mb-0"><a href="/" class="text-body"><i
+                                                                    class="fas fa-long-arrow-alt-left me-2"></i>Back to
+                                                                shop</a>
+                                                        </h6>
+                                                    </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 bg-grey">
+                                        <div class="p-5">
+                                            <h3 class="fw-bold mb-5 mt-2 pt-1">Summary</h3>
+                                            <hr class="my-4">
+
+                                            <div class="d-flex justify-content-between mb-4">
+                                                <h5 class="text-uppercase">Sub total</h5>
+                                                <h5>
+                                                    <%= sum %>
+                                                </h5>
+                                            </div>
+
+
+
+                                            <div class="d-flex justify-content-between mb-4">
+                                                <h5 class="text-uppercase">Shipping</h5>
+                                                <h5>
+                                                    <%= shipping %>
+                                                </h5>
+                                            </div>
+
+                                            <div class="d-flex justify-content-between mb-4">
+                                                <h5 class="text-uppercase">Discount</h5>
+                                                <h5>
+                                                    <%if(discount){%>
+                                                        <%= discount %>
+                                                            <%}else{%>0<%}%>
+                                                </h5>
+                                            </div>
+
+                                            <h5 class="text-uppercase mb-3">Coupon</h5>
+                                            <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal"
+                                                data-bs-target="#myModal">
+                                                Show all coupons
+                                            </button>
+                                            <form id="coupon-form" class="coupon-form mb-5"
+                                                action="/cart/discount-coupon" method="post">
+                                                <div class="form-outline">
+                                                    <input type="text" id="form3Examplea2"
+                                                        class="form-control form-control-lg" name="code" />
+                                                    <label class="form-label" for="form3Examplea2">Enter your
+                                                        code</label>
+                                                </div>
+                                                <button type="submit" class="btn btn-primary">Apply Coupon</button>
+                                            </form>
+
+
+                                            <hr class="my-4">
+
+                                            <div class="d-flex justify-content-between mb-5">
+                                                <h5 class="text-uppercase">Total price</h5>
+                                                <h5>
+                                                    <%if(discount){%>
+                                                        <%= sum + shipping - discount %>
+                                                            <%}else{%>
+                                                                <%= sum + shipping%>
+                                                                    <%}%>
+                                                </h5>
+                                            </div>
+                                            <a href="/cart/place-order" data-mdb-ripple-init
+                                                class="btn btn-dark btn-block btn-lg" data-mdb-ripple-color="dark">
+                                                Proceed to checkout
+                                            </a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">All coupons</h5>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <%if(coupons.length> 0){%>
+                                    <table class="align-middle">
+                                        <tbody>
+                                            <%coupons.forEach(function(c){%>
+                                                <tr>
+                                                    <td>
+                                                        <%=c.code%>
+                                                            <span class="btn border border-dark "
+                                                                onclick="copyToClipboard('<%=c.code%>')">click to copy
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                    height="16" fill="currentColor"
+                                                                    class="bi bi-clipboard" viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z" />
+                                                                    <path
+                                                                        d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z" />
+                                                                </svg>
+                                                            </span>
+                                                    </td>
+                                                    <td>
+                                                        <h3>
+                                                            <%= c.description %>
+                                                        </h3>
+                                                    </td>
+                                                </tr>
+                                                <%})%>
+                                        </tbody>
+                                    </table>
+
+                                    <%}else{%>
+                                        <h3 class="p-5">No coupons Available</h3>
+                                        <%}%>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <% } else {%>
+                <h2 class="text-center pt-5">Cart is empty</h2>
+                <% } %>
+
+    </section>

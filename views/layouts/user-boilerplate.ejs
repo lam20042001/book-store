@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/public/images/book-shop.png" type="image/x-icon">
+    <title>BOOK STORE</title>
+    <base href="/">
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="../public/css/style.css">
+    <!-- JQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+
+<body>
+        <%- include('./user-navbar') %>
+        <div style="height:70px;"></div>
+        <%- body -%>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+            <!-- JQuery Validation -->
+            <script type="text/javascript"
+                src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"></script>
+            <script type="text/javascript"
+                src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/additional-methods.min.js"></script>
+            <!-- Bootstrap 5 CDN -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+
+            <!-- fontawesome link  -->
+            <script src="https://kit.fontawesome.com/1b7b6c9623.js"></script>
+            <!-- Custom JS -->
+            <script src="../public/js/index.js" defer></script>
+            <script>
+                $("#contact-form").validate({
+                    errorClass: "error fail-alert",
+                    rules: {
+                        name: {
+                            required: true,
+                        },
+                        email: {
+                            required: true,
+                            email: true
+                        },
+                        number: {
+                            required: true,
+                            number: true
+                        },
+                        message: {
+                            required: true,
+                        },
+                        subscription: {
+                            required: true
+                        }
+                    },
+                    messages: {
+                        name: {
+                            required: "Please enter your name.",
+                        },
+                        number: {
+                            required: "Please enter your Mobile no.",
+                            number: "Please enter number"
+                        },
+                        email: {
+                            required: "Please enter your email.",
+                            email: "The email should be in the format: abc@domain.com"
+                        },
+                        message: {
+                            required: "Please enter your message.",
+                        },
+                        subscription: {
+                            required: "Enter your email"
+                        }
+                    },
+                    submitHandler: function () {
+                        myfunction();
+                        return false;
+                    }
+                });
+
+                function myfunction() {
+                    $.ajax({
+                        url: "https://script.google.com/macros/s/AKfycbz_ID5fQq7-pAwjyoE4aHZ7WnjaADr_wpYKU_yFCEkrwqPKe_wHywXIeO77JcnJAiUs/exec",
+                        data: $("#contact-form").serialize(),
+                        method: "post",
+                        success: function (response) {
+                            alert("Form submitted successfully")
+                            window.location.reload()
+                        },
+                        error: function (err) {
+                            alert("Something Error")
+                        }
+                    })
+                }
+
+            </script>
+</body>
+
+</html>

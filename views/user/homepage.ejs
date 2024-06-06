@@ -1,0 +1,67 @@
+<% layout('./layouts/user-boilerplate') -%>
+    <div class="container-fluid sticky-top bg-light" style="top:64px" onfocusout="hideSearchResults()">
+        <div class="container-fluid">
+            <div class="row ">
+                <div class="col-md-12">
+                    <input type="search" id="search-bar" class="form-control border border-3 border-info"
+                        oninput="sendData(this,'All')" placeholder="Search book here...">
+                </div>
+            </div>
+        </div>
+        <div id="search-results" class="container-fuild mt-4">
+
+        </div>
+    </div>
+    <section class="categories mt-5">
+        <h2 class="text-center">Genres</h2>
+        <div class="container m-auto">
+            <div class="row">
+                <% categories.forEach(function(cat) { %>
+                    <div class="col-md-2 col-6 mb-4">
+                        <a href="products/<%=cat.title%>" class="text-decoration-none text-dark">
+                            <button class="genre-button text-dark">
+                                <%= cat.title %>
+                            </button>
+                        </a>
+                    </div>
+                    <% }); %>
+            </div>
+        </div>
+    </section>
+    <section class="best-sellers mt-5">
+        <h2 class="text-center">Best Sellers</h2>
+        <div class="container m-auto">
+            <div class="row">
+                <% specials.forEach(function(sp) { %>
+                    <div class="col-md-3 mb-4">
+                        <div class="card border-0 rounded-0 shadow" style="width: 100%;">
+                            <a href="/products/product-details/<%=sp._id%>" class="text-decoration-none text-dark">
+                                <img src="<%= sp.image 
+                                ?`/public/images/product-img/${sp.image}`
+                                :"public/images/no-image.jpg" %>" class="card-img-top rounded-0"
+                                alt=""></a>
+                            <div class="card-body mt-3 mb-3">
+                                <a href="/products/product-details/<%=sp._id%>" class="text-decoration-none text-dark">
+                                    <h4 class="card-title">
+                                        <%= sp.title %>
+                                    </h4>
+                                </a>
+                            </div>
+                            <div class="row align-items-center text-center g-0">
+                                <div class="col-4">
+                                    <h5>
+                                        <%= sp.price %>
+                                    </h5>
+                                </div>
+                                <div class="col-8">
+                                    <button class="btn btn-dark w-100 p-3 rounded-0 text-white"
+                                        onclick="addToCart('<%= sp._id %>')">ADD TO CART</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <% }); %>
+            </div>
+        </div>
+    </section>
+    <%- include('../layouts/user-footer-section') %>

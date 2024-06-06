@@ -1,0 +1,46 @@
+<%- layout('./layouts/admin-boilerplate') %>
+    <div class="dash-content">
+        <h2 class=" mt-1 h1">All Categories</h2>
+        <a href="/admin/category/add-category"><button class="btn btn-info">Add new category</button> </a>
+        <div class="table-responsive-sm mt-5">
+            <% if (count>0){%>
+                <table id="example" class="table data-table align-middle" style="width:100%">
+                    <% success.forEach(function(msg){ %>
+                        <div class="alert alert-success" role="alert">
+                            <%= msg %>
+                        </div>
+                        <%})%>
+                            <% error.forEach(function(err){ %>
+                                <div class="alert alert-danger" role="alert">
+                                    <%= err %>
+                                </div>
+                                <%})%>
+                                    <thead>
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% categories.forEach(function(cat){ %>
+                                            <tr>
+                                                <td>
+                                                    <%= cat.title %>
+                                                </td>
+                                                <td><a href="/admin/category/edit-category/<%= cat._id %>"><i
+                                                            class="fa fa-pen pe-5"></i></a>
+                                                    <a class="confirmDeletion"
+                                                        href="/admin/category/delete-category/<%= cat._id %>"><i
+                                                            class="fa fa-trash"></i></a>
+                                                </td>
+                                            </tr>
+                                            <% }); %>
+                                    </tbody>
+                </table>
+                <%}else{%>
+
+                    <h3 class="text-center">No any Category</h3>
+                    <%}%>
+        </div>
+    </div>
+    </section>

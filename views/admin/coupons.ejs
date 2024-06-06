@@ -1,0 +1,63 @@
+<%- layout('./layouts/admin-boilerplate') %>
+    <div class="dash-content ">
+
+        <h2 class=" mt-1 h1">All Coupons</h2>
+        <a href="/admin/coupon/add-coupon"><button class="btn btn-info">Add a new coupon</button> </a>
+        <div class="table-responsive-sm mt-5">
+            <% if (count>0){%>
+                <table id="example" class="table data-table align-middle" style="width:100%">
+                    <% success.forEach(function(msg){ %>
+                        <div class="alert alert-success" role="alert">
+                            <%= msg %>
+                        </div>
+                        <%})%>
+                            <% error.forEach(function(err){ %>
+                                <div class="alert alert-danger" role="alert">
+                                    <%= err %>
+                                </div>
+                                <%})%>
+                                    <thead>
+                                        <tr>
+                                            <th>Coupon code</th>
+                                            <th>Discount</th>
+                                            <th>Minimum</th>
+                                            <th>Description</th>
+                                            <th>Expiry date</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% coupons.forEach(function(c){ %>
+                                            <tr>
+                                                <td>
+                                                    <%= c.code %>
+                                                </td>
+                                                <td>
+                                                    <%= c.discount %> %
+                                                </td>
+                                                <td>
+                                                    <%= c.minimum %>
+                                                </td>
+                                                <td>
+                                                    <%= c.description %>
+                                                </td>
+                                                <td>
+                                                    <%= c.expiryDate %>
+                                                </td>
+                                                <td><a href="/admin/coupon/edit-coupon/<%= c._id %>"><i
+                                                            class="fa fa-pen pe-5"></i></a>
+                                                    <a class="confirmDeletion"
+                                                        href="/admin/coupon/delete-coupon/<%= c._id %>"><i
+                                                            class="fa fa-trash"></i></a>
+                                                </td>
+                                            </tr>
+                                            <% }); %>
+                                    </tbody>
+                </table>
+                <%}else{%>
+
+                    <h3 class="text-center">No any Coupons</h3>
+                    <%}%>
+        </div>
+    </div>
+    </section>

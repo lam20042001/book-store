@@ -1,0 +1,81 @@
+<% layout('./layouts/user-boilerplate') -%>
+
+
+    <section class="orders ">
+        <div class="container">
+            <h1 class="pt-3 title"> My Orders </h1>
+            <%if( order.length>0 ){%>
+                <% order.forEach(function(o){%>
+                    <h2 class="pt-3"> Order No: <%= order.length - order.indexOf(o) %>
+                    </h2>
+                    <div class="border rounded border-3 mt-5">
+                        <table class="table align-middle">
+                            <thead class="">
+                                <th>Products</th>
+                                <th>Order date</th>
+                                <th>Status</th>
+                                <th></th>
+                            </thead>
+                            <tbody>
+                                <tr class="">
+                                    <td class="w-25 pe-5 ">
+                                        <% o.orderDetails.forEach(function(d){%>
+                                            <div>
+                                                <img width="100px"
+                                                    src="/public/images/product-img/<%=d?.product?.image%>" alt="">
+                                                <h3>
+                                                    <%=d?.product?.title%>
+                                                </h3>
+                                            </div>
+                                            <%})%>
+                                    </td>
+                                    <td>
+                                        <h3>
+                                            <% let date=o.date.split(" ") %>
+                                <%=  date[1] +" "+ date[2] +" "+ date[3] %></h3>
+                        </td>
+                        
+                        <td>
+                            <%if(o.status=='placed'){%>
+                            <h3><%=o.status%></h3>
+
+                                <%}else if (o.status=='cancelled'){%>
+                            <h3 class=" text-danger">
+                                                <%=o.status%>
+                                        </h3>
+                                        <%}else{%>
+                                            <h3 class="text-success">
+                                                <%=o.status%>
+                                            </h3>
+
+                                            <%}%>
+                                    </td>
+
+                                    <td>
+                                        <a href="/orders/order-details/<%= o._id%>"><button
+                                                class="btn btn-outline-secondary">View
+                                                Details</button></a> <br>
+                                        <% if((o.status=='placed' ) && (new Date().getTime() - new
+                                            Date(o.date).getTime()) < 7200000 ) { %>
+                                            <button onclick="cancelOrder('<%=o._id%>')"
+                                                class="mt-2 btn btn-outline-secondary">Cancel
+                                                Order</button>
+                                            <%} else{%>
+                                                <% if(o.status=='cancelled' ) {%>
+                                                    <button class="mt-2 btn btn-outline-secondary disabled"> Order
+                                                        cancelled</button>
+                                                    <%}%>
+                                                        <%}%>
+                                    </td>
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <%})%>
+                        <%}else{%>
+                            <h2 class="text-center pt-5">No orders</h2>
+                            <%}%>
+        </div>
+    </section>

@@ -1,0 +1,52 @@
+<%- layout('./layouts/admin-boilerplate') %>
+    <div class="dash-content container add">
+        <h2 class="page-title">Add new coupon</h2>
+        <a href="/admin/coupon" class="btn"><i class="fa fa-angle-left"></i></a>
+
+        <div class=" container mt-5">
+            <form id="add-edit" method="post" action="/admin/coupon/add-coupon">
+                <% error.forEach(function(err){ %>
+                    <div class="alert alert-danger" role="alert">
+                        <%= err %>
+                    </div>
+                    <% }) %>
+                        <div class="form-group row">
+                            <label for="coupon" class="col-sm-2 col-form-label">Coupon Code</label>
+                            <div class="col-sm-10">
+                                <input id="coupon" type="text" class="form-control" name="code"
+                                    placeholder="Coupon code">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="description" class="col-sm-2 col-form-label">Description</label>
+                            <div class="col-sm-10">
+                                <input id="description" type="text" class="form-control" name="description"
+                                    placeholder="Description">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="offer" class="col-sm-2 col-form-label">Discount %</label>
+                            <div class="col-sm-10">
+                                <input id="offer" type="text" class="form-control" name="discount"
+                                    placeholder="Discount %">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="minimum" class="col-sm-2 col-form-label">Minimum Amount</label>
+                            <div class="col-sm-10">
+                                <input id="minimum" type="number" class="form-control" name="minimum"
+                                    placeholder="Minimum amount to discount">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="expiry" class="col-sm-2 col-form-label">Expiry Date</label>
+                            <div class="col-sm-10">
+                                <input id="expiry" type="text" class="form-control" name="expiry"
+                                    placeholder="Expiry date" onfocus="(this.type='date')" onblur="(this.type='text')">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+    </section>

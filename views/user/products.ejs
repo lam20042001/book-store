@@ -1,0 +1,73 @@
+<% layout('./layouts/user-boilerplate') -%>
+    <div class="container-fluid sticky-top bg-light" style="top:64px" onfocusout="hideSearchResults()">
+        <div class="container-fluid">
+            <div class="row ">
+                <div class="col-md-12">
+                    <input type="search" id="search-bar" class="form-control border border-3 border-info"
+                        oninput="sendData(this,'<%=category%>')" placeholder="Search book here...">
+                </div>
+            </div>
+        </div>
+        <div id="search-results" class="search-results border border-info rounded container-fuild mt-4">
+
+        </div>
+    </div>
+    <section class="container">
+        <h1 class="title"> Our products </h1>
+        <div class="container mb-5">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    <%=category%>
+                </button>
+                <ul class="dropdown-menu">
+                    <%categories.forEach(function(cat){%>
+                        <li><a class=" dropdown-item" href="products/<%=cat.title%>">
+                                <%= cat.title %>
+                            </a></li>
+                        <% }) %>
+                            <li><a class="dropdown-item" href="products/ALL">ALL</a></li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="row">
+            <% if (products.length> 0) { %>
+                <% products.forEach(function(pro) { %>
+                    <div class="col-md-3 mb-4">
+                        <div class="card product-card">
+                            <img src="<%= pro.image
+                            ?`/public/images/product-img/${pro.image}`
+                            :" public/images/no-image.jpg" %>"
+                            class="card-img-top img-fluid"
+                            alt="Product Image">
+                            <div class="card-body">
+                                <h6 class="card-title">
+                                    <%= pro.title %>
+                                </h6>
+                                <p class="card-text">Price: <%= pro.price %>
+                                </p>
+                                <div class="btn-group d-flex justify-content-center" role="group"
+                                    aria-label="Product Actions">
+                                    <a href="/products/product-details/<%= pro._id %>" class="btn btn-primary"><i
+                                            class="fas fa-eye"></i></a>
+                                    <button onclick="addToCart('<%= pro._id %>')" class="btn btn-success"><i
+                                            class="fas fa-shopping-cart"></i> </button>
+                                    <button onclick="addToWishlist('<%= pro._id %>')" class="btn btn-danger"><i
+                                            id="<%= pro._id %>-heart" class="fas fa-heart"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <% }) %>
+                        <% } else { %>
+                            <div class="col">
+                                <h2 class="text-center pt-5">No products available</h2>
+                            </div>
+                            <% } %>
+        </div>
+
+    </section>
+
+
+    <%- include('../layouts/user-footer-section') %>

@@ -1,0 +1,84 @@
+<%- layout('./layouts/admin-boilerplate') %>
+    <div class="dash-content container add">
+        <h2 class="page-title">Edit Product</h2>
+        <a href="/admin/product" class="btn "><i class="fa fa-angle-left"></i></a>
+        <div class="container mt-5">
+            <form id="add-edit" method="post" action="/admin/product/edit-product/<%= id %>"
+                enctype="multipart/form-data">
+                <% error.forEach(function(err){ %>
+                    <div class="alert alert-danger" role="alert">
+                        <%= err %>
+                    </div>
+                    <% }) %>
+                        <div class="form-group row">
+                            <label for="title" class="col-sm-2 col-form-label">Title</label>
+                            <div class="col-sm-10">
+                                <input id="title" type="text" class="form-control" name="title" value="<%= title %>"
+                                    placeholder="Title">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="author" class="col-sm-2 col-form-label">Author</label>
+                            <div class="col-sm-10">
+                                <input id="author" type="text" class="form-control" name="author" value="<%= author %>"
+                                    placeholder="Author">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="year" class="col-sm-2 col-form-label">Publish year</label>
+                            <div class="col-sm-10">
+                                <input id="year" type="number" class="form-control" name="year" value="<%= year %>"
+                                    placeholder="Publish year">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="description" class="col-sm-2 col-form-label">Description</label>
+                            <div class="col-sm-10">
+                                <textarea id="description" class="form-control" cols="30" rows="10" name="description"
+                                    placeholder="Description"><%= description %></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="category" class="col-sm-2 col-form-label">Category</label>
+                            <div class="col-sm-10">
+                                <select id="category" class="form-control" name="category">
+                                    <% categories.forEach(function(cat){ %>
+                                        <option value="<%= cat.title %>" <% if (cat.title==category) { %>
+                                            selected="selected" <% } %>>
+                                                <%= cat.title %>
+                                        </option>
+                                        <% }); %>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="image" class="col-sm-2 col-form-label">Image</label>
+                            <div class="col-sm-10">
+                                <input id="image" type="file" class="form-control-file" name="image" value="<%= image %>"user>
+                                <img width="100px" height="100px" src="/public/images/product-img/<%= image %>"
+                                    id="img-prvw" class="img-fluid mt-2" alt="">
+                                <input type="hidden" name="pimage" value="<%= image %>">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="special" class="col-sm-2 col-form-label">Special</label>
+                            <div class="col-sm-10">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" name="special" id="special"
+                                        value="true" <% if (special==true) { %> checked <% } %> >
+                                        <label class="form-check-label" for="special">Special</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="price" class="col-sm-2 col-form-label">Price</label>
+                            <div class="col-sm-10">
+                                <input id="price" type="text" class="form-control" name="price" value="<%= price %>"
+                                    placeholder="Price">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+        </div>
+    </div>
+    </section>

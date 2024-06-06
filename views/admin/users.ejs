@@ -1,0 +1,60 @@
+<%- layout('./layouts/admin-boilerplate') %>
+    <div class="users-content">
+        <h2 class="mt-1 h1">All Users</h2>
+        <div class="table-responsive">
+            <% if (count>0){%>
+                <table id="example" class="table data-table align-middle">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Contact</th>
+                            <th>Image</th>
+                            <th>Verification</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% users.forEach(function(user){ %>
+                            <tr>
+                                <td>
+                                    <%= user.name %>
+                                </td>
+                                <td>
+                                    <%= user.email %>
+                                </td>
+                                <td>
+                                    <%= user.contact %>
+                                </td>
+                                <td>
+                                    <% if (user.image=="" ){%>
+                                        <img width="80px" height="80px" src="/public/images/no-image.jpg"
+                                            alt="no-image">
+                                        <%}else{%>
+                                            <img width="80px" height="80px"
+                                                src="/public/images/user-img/<%= user.image %>"
+                                                alt="<%=user.name%> img">
+                                            <%}%>
+                                </td>
+                                <td>
+                                    <%= user.verified %>
+                                </td>
+                                <td>
+                                    <% if (!user.status){%>
+                                        <a class="me-2 btn btn-danger"
+                                            href="/admin/users/block/<%= user._id %>">Block</a>
+                                        <%}else{%>
+                                            <a class="btn-dark btn" href="/admin/users/unblock/<%= user._id %>">
+                                                Unblock</a>
+                                            <%}%>
+                                </td>
+                            </tr>
+                            <% }); %>
+                    </tbody>
+                </table>
+                <%}else{%>
+
+                    <h3 class="text-center">No any registered user.</h3>
+                    <%}%>
+        </div>
+    </div>

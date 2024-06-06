@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/public/images/book-shop.png" type="image/x-icon">
+    <title>BOOK STORE</title>
+    <base href="/">
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+    <!-- CSS only -->
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="../public/css/adminStyle.css">
+    <link rel="stylesheet" href="../public/css/style.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/2.0.7/css/dataTables.dataTables.min.css">
+    <!-- custom js file link  -->
+    <script src="../public/js/index.js" defer></script>
+    <!-- fontawesome link  -->
+    <script src="https://kit.fontawesome.com/1b7b6c9623.js"></script>
+
+</head>
+
+<body>
+    <div class="container-fluid sidebar">
+        <div class="row flex-nowrap">
+            <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white vh-100">
+                    <a href="/admin"
+                        class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none text-nowrap">
+                        <span class="fs-3 d-none d-sm-inline">BOOK STORE</span>
+                    </a>
+                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
+                        id="menu">
+                        <li class="nav-item">
+                            <a href="/admin/dashboard" class="nav-link align-middle px-0 fs-4 text-white">
+                                <i class="uil uil-chart"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admin/users" class="nav-link px-0 align-middle fs-4 text-white">
+                                <i class="uil uil-users-alt"></i> <span class="ms-1 d-none d-sm-inline">All
+                                    Users</span></a>
+                        </li>
+                        <li>
+                            <a href="/admin/product" class="nav-link px-0 align-middle fs-4 text-white ">
+                                <i class="uil uil-box"></i> <span class="ms-1 d-none d-sm-inline">Products</span></a>
+                        </li>
+                        <li>
+                            <a href="/admin/category" class="nav-link px-0 align-middle fs-4 text-white">
+                                <i class="uil uil-files-landscapes"></i> <span
+                                    class="ms-1 d-none d-sm-inline">Categories</span></a>
+                        </li>
+                        <li>
+                            <a href="/admin/coupon" class="nav-link px-0 align-middle fs-4 text-white">
+                                <i class="uil uil-pricetag-alt"></i> <span
+                                    class="ms-1 d-none d-sm-inline">Coupons</span></a>
+                        </li>
+                        <li>
+                            <a href="/admin/orders" class="nav-link px-0 align-middle fs-4 text-white">
+                                <i class="uil uil-shopping-cart-alt"></i> <span
+                                    class="ms-1 d-none d-sm-inline">Orders</span> </a>
+                        </li>
+                    </ul>
+                    <hr>
+
+                </div>
+            </div>
+            <div class="col py-3">
+                <%- body -%>
+            </div>
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"></script>
+<script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/additional-methods.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+
+<!-- Bootstrap 5 CDN -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+<script src="/public/js/index.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#example').DataTable();
+    });
+</script>
+
+<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/2.0.7/js/dataTables.min.js"></script>
+
+</html>

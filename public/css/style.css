@@ -1,0 +1,228 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+body {
+    font-family: Roboto, sans-serif;
+}
+
+.navbar-brand {
+    height: 48px;
+}
+
+.navbar-nav .nav-item:hover {
+    background-color: rgba(180, 190, 203, 0.4);
+}
+
+.hover-right:hover i {
+    padding-right: 2rem;
+    transition: padding-right 0.3s ease;
+}
+
+.hover-right i {
+    color: #000000;
+    padding-right: .5rem;
+    transition: padding-right 0.5s ease;
+}
+
+.hover-right {
+    color: #7c6ea0;
+}
+
+.side-bar {
+    color: white;
+}
+
+.error {
+    color: red;
+    flex-basis: 100%
+}
+
+.best-sellers img,
+.categories img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.3s ease;
+}
+
+.best-sellers img:hover {
+    transform: scale(1.05);
+}
+
+.categories img:hover {
+    transform: scale(1.1);
+}
+
+.best-sellers .card-title {
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.categories .card-title {
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.best-sellers .card-title:hover {
+    color: #8f6891;
+    transform: scale(1.1);
+}
+
+.categories .card-title:hover {
+    color: #8f6891;
+    transform: scale(1.1);
+}
+
+.best-sellers .btn {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.categories .btn {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.best-sellers .btn:hover {
+    background-color: #914d81;
+    color: #000;
+}
+
+.categories .btn:hover {
+    background-color: #914d81;
+    color: #000;
+}
+
+.btn-profile-hover:hover {
+    background-color: #47617b;
+    color: #212529;
+    border-color: #f8f9fa;
+    transition: all 0.3s ease;
+}
+
+.product-card img {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+}
+
+@media (min-width: 1025px) {
+    .h-custom {
+        height: 100vh !important;
+    }
+}
+
+.card-registration .select-input.form-control[readonly]:not([disabled]) {
+    font-size: 1rem;
+    line-height: 2.15;
+    padding-left: .75em;
+    padding-right: .75em;
+}
+
+.card-registration .select-arrow {
+    top: 13px;
+}
+
+.bg-grey {
+    background-color: #eae8e8;
+}
+
+@media (min-width: 992px) {
+    .card-registration-2 .bg-grey {
+        border-top-right-radius: 16px;
+        border-bottom-right-radius: 16px;
+    }
+}
+
+@media (max-width: 991px) {
+    .card-registration-2 .bg-grey {
+        border-bottom-left-radius: 16px;
+        border-bottom-right-radius: 16px;
+    }
+}
+
+.order-noti {
+    max-width: 500px;
+}
+
+.genre-button {
+    padding: 10px 20px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 10px;
+    background: linear-gradient(45deg, #f06, #aaf);
+    color: white;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+div:nth-of-type(1) .genre-button {
+    background: linear-gradient(to top, #c4c5c7 0%, #dcdddf 52%, #ebebeb 100%);
+}
+
+div:nth-of-type(2) .genre-button {
+    background: linear-gradient(to right, rgb(173, 83, 137), rgb(60, 16, 83));
+}
+
+div:nth-of-type(3) .genre-button {
+    background: linear-gradient(45deg, #a18cd1, #fbc2eb);
+}
+
+div:nth-of-type(4) .genre-button {
+    background: linear-gradient(45deg, #432b09, #fcb69f);
+}
+
+div:nth-of-type(5) .genre-button {
+    background: linear-gradient(45deg, #a1c4fd, #c2e9fb);
+}
+
+div:nth-of-type(6) .genre-button {
+    background: linear-gradient(106.5deg, rgba(255, 215, 185, 0.91) 23%, rgba(223, 159, 247, 0.8) 93%);
+}
+
+.genre-button:hover {
+    opacity: 0.9;
+}
+
+.image-product img {
+    width: auto;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.image-product:hover img {
+    transform: scale(1.2);
+    opacity: 0.7;
+}
+
+.image-product .hover-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    color: white;
+    font-size: 20px;
+}
+
+.image-product:hover .hover-text {
+    opacity: 1;
+}
+
+#search-results p:hover {
+    color: gray
+}
+
+#search-results {
+    display: none;
+}
+.wishlist img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+}
+.wishlist img, .wishlist h3{
+    transition: transform 0.3s ease;
+}
+.wishlist h3:hover {
+    transform: scale(1.05); 
+    color: #5b7e6d; 
+}

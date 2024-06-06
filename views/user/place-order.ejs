@@ -1,0 +1,150 @@
+<% layout('./layouts/user-boilerplate') -%>
+    <div class="container">
+        <div class="main-body profile">
+            <div class="row mb-3">
+                <div class="col-md-8">
+                    <div class="card profile-card">
+                        <div class="card-body">
+                            <h2 class="text-center">Address</h2>
+                            <div class="row ">
+                                <%if(address.details.length> 0){%>
+                                    <% address.details.forEach(function(ad){%>
+                                        <div class="col-md-4 mb-3 text-start address pe-1">
+                                            <div class="container border border-4 border-secondary rounded p-3">
+                                                <h4 class="mb-4">Address</h4>
+                                                <p><strong>Street:</strong>
+                                                    <%= ad.street %>
+                                                </p>
+                                                <p><strong>Ward:</strong>
+                                                    <%= ad.ward %>
+                                                </p>
+                                                <p><strong>District:</strong>
+                                                    <%= ad.district %>
+                                                </p>
+                                                <p><strong>City:</strong>
+                                                    <%= ad.city %>
+                                                </p>
+                                                <p><strong>Contact:</strong>
+                                                    <%= ad.contact %>
+                                                </p>
+                                                <div class="bottom-0 pb-3">
+                                                    <input name="address"
+                                                        id="default-<%= address.details.indexOf(ad) %>" type="radio"
+                                                        value="<%= address.details.indexOf(ad) %>"
+                                                        onclick="selectAddress('<%= address.details.indexOf(ad) %>')" <%
+                                                        if(ad.select==true) { %> checked <% } %>>
+                                                        <label class="text-dark fs-4"
+                                                            for="default-<%= address.details.indexOf(ad) %>">Select</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <%})%>
+                                            <%}else{%>
+                                                <h3 class="h1 text-center p-5 text-danger">You must add your address
+                                                </h3>
+                                                <%}%>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <button onclick="addAddress()"
+                                                                class="btn border border-info">Add new
+                                                                address</button>
+                                                            <form id="add-address" class="profile-form mt-4 d-none"
+                                                                method="post" action="/profile/add-address">
+                                                                <div class="form-group mt-2">
+                                                                    <input type="text" class="form-control" id="street"
+                                                                        name="street" placeholder="Street" required>
+                                                                </div>
+                                                                <div class="form-group mt-2">
+                                                                    <input type="text" class="form-control" id="ward"
+                                                                        name="ward" placeholder="Ward" required>
+                                                                </div>
+                                                                <div class="form-group mt-2">
+                                                                    <input type="text" class="form-control"
+                                                                        id="district" name="district"
+                                                                        placeholder="District" required>
+                                                                </div>
+                                                                <div class="form-group mt-2">
+                                                                    <input type="text" class="form-control" id="city"
+                                                                        name="city" placeholder="City" required>
+                                                                </div>
+                                                                <div class="form-group mt-2">
+
+                                                                    <input type="number" class="form-control"
+                                                                        id="contact" name="contact"
+                                                                        placeholder="Contact" required>
+                                                                </div>
+
+                                                                <div class="form-group mt-4">
+                                                                    <button type="submit" class="btn btn-primary">Add
+                                                                        Address</button>
+                                                                    <a class="btn btn-secondary"
+                                                                        href="/cart/place-order">Cancel</a>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="text-start h-100">
+                        <div class="card p-4 ">
+                            <div class="summary-item d-flex justify-content-between mb-4">
+                                <div class="label fs-3 text">Total Amount</div>
+                                <div class="value fs-3 text">
+                                    <%= total %>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="summary-item d-flex justify-content-between mb-4">
+                                <div class="label fs-3 text">Shipping</div>
+                                <div class="value fs-3 text">
+                                    <%= shipping %>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="summary-item d-flex justify-content-between mb-4">
+                                <div class="label fs-3 text">Discount</div>
+                                <div class="value fs-3 text">
+                                    <% if (discount) { %>
+                                        <%= discount %>
+                                            <% } else { %>0<% } %>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="summary-item d-flex justify-content-between mb-4 total">
+                                <div class="label fs-3 text">Net Amount</div>
+                                <div class="value fs-3 text fw-bold">
+                                    <%= total + shipping - discount %>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="card mt-4 justify-content-center p-4">
+                            <h2>Select payment method</h2>
+                            <form id="payment-form" action="/cart/payment" method="post" class="pay-form text-start ">
+                                <div class="form-group">
+                                    <input name="payment" type="radio" id="cash-payment" value="COD">
+                                    <label class="form-check-label p-2 " for="cash-payment">Cash on
+                                        Delivery</label>
+                                </div>
+                                <div class="form-group">
+                                    <input name="payment" type="radio" id="card-payment" value="Card" checked>
+                                    <label class="form-check-label p-2 " for="card-payment">Debit/Credit</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary mb-5 ms-3" <% if(address.details.length <
+                                    1){%>
+                                    disabled <%}%>>Place Order</button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    </div>
