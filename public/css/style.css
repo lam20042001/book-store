@@ -215,14 +215,38 @@ div:nth-of-type(6) .genre-button {
 #search-results {
     display: none;
 }
+
 .wishlist img:hover {
     transform: scale(1.05);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
-.wishlist img, .wishlist h3{
+
+.wishlist img,
+.wishlist h3 {
     transition: transform 0.3s ease;
 }
+
 .wishlist h3:hover {
-    transform: scale(1.05); 
-    color: #5b7e6d; 
+    transform: scale(1.05);
+    color: #5b7e6d;
+}
+
+@keyframes rainbow {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+.rainbow-text {
+    font-size: 50px;
+    font-weight: bold;
+    background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+    background-size: 400% 100%;
+    background-clip: text;
+    color: transparent;
+    animation: rainbow 5s linear infinite;
 }

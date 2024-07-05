@@ -38,7 +38,7 @@ async function getProductsByCategory(req, res, next) {
     try {
         let category = req.params.category;
         let checkCategory = await Category.findOne({ title: category });
-        if (!checkCategory) {
+        if (!checkCategory && category != 'ALL') {
             const err = new Error();
             err.status = 500;
             throw err;
@@ -63,6 +63,7 @@ async function getProductsByCategory(req, res, next) {
         }
         res.render('user/products', { category, products, categories, user, count, wishcount });
     } catch (err) {
+        console.log(err)
         err.status = 500;
         next(err);
     }

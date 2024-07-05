@@ -2,6 +2,23 @@
 
 This is a simple book store web application built with Node.js, Express.js, and MongoDB.
 
+
+## Deployed Website
+
+You can access the deployed website at the following link:
+
+https://book-store-rjze.onrender.com
+
+
+You can access the admin functions at the following link:
+
+https://book-store-rjze.onrender.com/admin
+
+**Admin Account** cannot be created automatically. Use the below account to access admin functions.
+```
+    email: lam@gmail.com
+    password: lam123456
+```
 ## Features
 
 ### For Users
@@ -12,6 +29,7 @@ This is a simple book store web application built with Node.js, Express.js, and 
 - **Check Orders**: Users can check their order history and view details of their past orders.
 
 ### For Admins
+
 
 - **Manage Products**: Admins can add, edit, and delete products (books) from the store.
 - **Manage Orders**: Admins can view and manage orders placed by users.
@@ -92,6 +110,3 @@ Before running this application locally, make sure you have the following instal
 
 4. Open a web browser and go to http://localhost:4000 to view the application.
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
